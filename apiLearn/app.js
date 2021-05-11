@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: OpenLcuk
+ * @Date: 2021-05-11 09:04:34
+ * @LastEditors: OpenLcuk
+ * @LastEditTime: 2021-05-11 09:16:28
+ */
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +17,7 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-//  改写  这行代码之前是再www中
+//  改写  这行代码之前是再www中 
 var http = require('http');
 var server = http.createServer(app);
 
