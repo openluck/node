@@ -88,6 +88,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);  
   console.log("服务已启动\n");
-  
-  console.log('\x1B[43m%s\x1B[46m', "github:https://github.com/catbea/mykoa2"); 
 }

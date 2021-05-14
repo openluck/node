@@ -67,7 +67,6 @@ router.post('/add', async(ctx, next) => {
 router.post('/userLogin', async(ctx, next) =>{
     var _username = ctx.request.body.username;
     var _userpwd = ctx.request.body.userpwd;
-
     await userService.userLogin(_username,_userpwd).then((res) => {
         let r = '';
         console.log(res);
@@ -91,7 +90,6 @@ router.post('/userLogin', async(ctx, next) =>{
                 mess:"账号或密码错误"
             }  
         }
-
     }).catch((err)=>{
         ctx.body = {
             code:"800002",
