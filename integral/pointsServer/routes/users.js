@@ -195,7 +195,6 @@ router.get("/goods", async (ctx, next) => {
       };
     });
 });
-
 // 注册vip
 router.post("/userRegVip", async (ctx, next) => {
   var _username = ctx.request.body.username;
@@ -328,4 +327,89 @@ router.post("/userRegAdm", async (ctx, next) => {
       };
     });
 });
+// 查看积分数
+router.get('/findPointes', async (ctx, next) => {
+  await userService
+    .findPointes()
+    .then((res) => {
+      let r = "";
+      if (res.length) {
+        r = "ok";
+        ctx.body = {
+          code: "200",
+          data: res,
+          mess: "ok",
+        };
+      } else {
+        r = "error";
+        ctx.body = {
+          code: "400",
+          data: r,
+          mess: "查询失败",
+        };
+      }
+    })
+    .catch((err) => {
+      ctx.body = {
+        code: "200",
+        data: err,
+      };
+    });
+})
+// 发布积分
+router.post('/publishPointes', async (ctx, next) => {
+  var _remainPointes = ctx.request.body.remainPointes;
+  await userService.publishPointes(_remainPointes).then((res) => {
+    let r = "";
+    if (_remainPointes !== '') {
+      r = "ok";
+      ctx.body = {
+        code: "200",
+        // data: result,
+        mess: "发布成功",
+      };
+    } else {
+      r = "error";
+      ctx.body = {
+        code: "400",
+        data: r,
+        mess: "发布失败",
+      };
+    }
+  })
+    .catch((err) => {
+      ctx.body = {
+        code: "200",
+        data: err,
+      };
+    });
+})
+// 商品详情
+router.post('/goodDetails', async (ctx, next) => {
+  var _imgId = ctx.request.body.imgId;
+  await userService.goodDetails(_imgId).then((res) => {
+    let r = "";
+    if (res.length) {
+      r = "ok";
+      ctx.body = {
+        code: "200",
+        data: res,
+        mess: "ok",
+      };
+    } else {
+      r = "error";
+      ctx.body = {
+        code: "400",
+        data: r,
+        mess: "查询失败",
+      };
+    }
+  })
+    .catch((err) => {
+      ctx.body = {
+        code: "200",
+        data: err,
+      };
+    });
+})
 module.exports = router;

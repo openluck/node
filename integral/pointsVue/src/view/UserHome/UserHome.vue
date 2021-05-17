@@ -28,6 +28,10 @@
           <a-icon type="user" />
           <span class="nav-text">个人信息</span>
         </a-menu-item>
+        <a-menu-item key="4" @click="goPage(4)">
+          <a-icon type="user" />
+          <span class="nav-text">发布积分</span>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -76,11 +80,12 @@ export default {
           break;
         case 2:
           this.$router.push("/pointes");
-          console.log(2);
           break;
         case 3:
           this.$router.push("/userinfo");
-          console.log(3);
+          break;
+        case 4:
+          this.$router.push("/publish");
           break;
       }
     },

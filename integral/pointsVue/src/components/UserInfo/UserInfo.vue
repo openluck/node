@@ -1,11 +1,15 @@
 <template>
   <div class="user-info">
     <div class="info-table">
+      <div class="btn">
+        <a-button type="primary" @click="send"> 赠送积分 </a-button>
+      </div>
       <a-table :columns="columns" :data-source="dataSource" :pagination="false">
         <a slot="name" slot-scope="text">{{ text }}</a>
       </a-table>
     </div>
     <div id="main" style="width: 90%; height: 400px"></div>
+    <div id="main2" style="width: 90%; height: 400px"></div>
   </div>
 </template>
 
@@ -64,13 +68,15 @@ export default {
       columns,
       dataSource: [], // 表格数据
       userName: "",
-      userAdName: ''
+      userAdName: "",
     };
   },
   mounted() {
     setTimeout(() => {
       this.userName = JSON.parse(sessionStorage.getItem("userIfon")).username;
-      this.userAdName = JSON.parse(sessionStorage.getItem("userIfon")).adusername;
+      this.userAdName = JSON.parse(
+        sessionStorage.getItem("userIfon")
+      ).adusername;
       this.getUserInfo();
       this.getAdUserInfo();
       this.drawChart();
@@ -92,7 +98,7 @@ export default {
         }
       });
     },
-    // 用户信息
+    // 企业信息
     getAdUserInfo() {
       this.$http({
         method: "post",
@@ -112,6 +118,7 @@ export default {
       setTimeout(() => {
         // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(document.getElementById("main"));
+        let myChart2 = this.$echarts.init(document.getElementById("main2"));
         // 指定图表的配置项和数据
         let option = {
           title: {
@@ -147,20 +154,42 @@ export default {
             },
           ],
         };
+        let zxOption = {
+          // 折线图
+          xAxis: {
+            type: "category",
+            data: ["一级", "二级", "三级", "四级", "五级", "六级", "七级"],
+          },
+          yAxis: {
+            type: "value",
+          },
+          series: [
+            {
+              data: [100, 150, 200, 218, 135, 147, 260],
+              type: "line",
+            },
+          ],
+        };
         myChart.setOption(option);
-        console.log(
-          "this.dataSource.outpointes:",
-          this.dataSource[0].getpointes
-        );
+        myChart2.setOption(zxOption);
       }, 500);
+    },
+    send() {
+      this.$router.push("/send");
     },
   },
 };
 </script>
 <style lang="less" scoped>
 .user-info {
+  .info-table {
+    // display: flex;
+  }
   #main {
     margin-top: 30px;
+  }
+  .btn {
+    margin-bottom: 30px;
   }
 }
 </style>

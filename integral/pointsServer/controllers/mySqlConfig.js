@@ -101,6 +101,22 @@ let findAdUser = function (username) {
   return allServices.query(_sql);
 };
 
+// 积分数
+let findPointes = function () {
+  let _sql = `select * from publish`;
+  return allServices.query(_sql);
+}
+// 发布积分
+let publishPointes = function (remainPointes) {
+  // let _sql = `update publish set orgPointes="${orgPointes}",remainPointes="${remainPointes}";`;
+  let _sql = `update publish set remainPointes="${remainPointes}";`;
+  return allServices.query(_sql);
+}
+// 获取商品详情
+let goodDetails = function (imgId) {
+  let _sql = `select * from goods where id="${imgId}";`;
+  return allServices.query(_sql);
+}
 module.exports = {
   userLogin,
   adminLogin,
@@ -111,5 +127,8 @@ module.exports = {
   insertVipUser,
   findVipUser,
   insertAdUser,
-  findAdUser
+  findAdUser,
+  findPointes,
+  publishPointes,
+  goodDetails
 };

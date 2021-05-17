@@ -6,20 +6,20 @@
     </div>
     <div class="goods">
       <ul class="goods-ul">
-        <li class="goods-li">
-          <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
-            <img src="../../assets/img/sp1.png" alt="" />
-          </div>
-          <span class="goods-name">{{ goods[0].goodName }}</span>
+        <li class="goods-li" v-for="item in goodsList" :key="item.id">
+          <a href="javascript:;" @click="goDetails(item.id)">
+            <div class="goods-img">
+              <img :src="item.goodsimg" alt="" />
+            </div>
+          </a>
+          <span class="goods-name">{{ item.goodsname }}</span>
           <p>
-            <span>价格：{{ goods[0].money }}</span>
-            <span>兑换积分：{{ goods[0].pointes }}</span>
+            <span>价格：{{ item.money }}</span>
+            <span>兑换积分：{{ item.pointe }}</span>
           </p>
         </li>
-        <li class="goods-li">
+        <!-- <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp2.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[1].goodName }}</span>
@@ -30,7 +30,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp3.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[2].goodName }}</span>
@@ -41,7 +40,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp4.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[3].goodName }}</span>
@@ -52,7 +50,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp5.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[4].goodName }}</span>
@@ -63,7 +60,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp6.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[5].goodName }}</span>
@@ -74,7 +70,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp7.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[6].goodName }}</span>
@@ -85,7 +80,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp8.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[7].goodName }}</span>
@@ -96,7 +90,6 @@
         </li>
         <li class="goods-li">
           <div class="goods-img">
-            <!-- <img :src="item.goodsImg" alt="" /> -->
             <img src="../../assets/img/sp9.png" alt="" />
           </div>
           <span class="goods-name">{{ goods[8].goodName }}</span>
@@ -104,7 +97,7 @@
             <span>价格：{{ goods[8].money }}</span>
             <span>兑换积分：{{ goods[8].pointes }}</span>
           </p>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -118,80 +111,9 @@ export default {
       userBalance: "", // 账户余额
       intbalance: "", // 积分余额
       userName: "",
+      goodsList: [],
       goodsName: "",
       goodsImg: "",
-      goods: [
-        {
-          id: "1",
-          goodsImg: "../../assets/img/sp1.png",
-          goodName: "精致盒子",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "2",
-          goodsImg: "../../assets/img/sp2.png",
-          goodName: "挂具",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "3",
-          goodsImg: "../../assets/img/sp3.png",
-          goodName: "厨房用品",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "4",
-          goodsImg: "../../assets/img/sp4.png",
-          goodName: "洗碗毛巾",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "5",
-          goodsImg: "../../assets/img/sp5.png",
-          goodName: "餐具挂具",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "6",
-          goodsImg: "../../assets/img/sp6.png",
-          goodName: "厨房挂具",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "7",
-          goodsImg: "../../assets/img/sp7.png",
-          goodName: "灯",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "8",
-          goodsImg: "../../assets/img/sp8.png",
-          goodName: "加湿器",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "9",
-          goodsImg: "../../assets/img/sp9.png",
-          goodName: "小风扇",
-          money: 0,
-          pointes: 10,
-        },
-        {
-          id: "10",
-          goodsImg: "../../assets/img/sp10.png",
-          goodName: "餐具",
-          money: 0,
-          pointes: 10,
-        },
-      ],
     };
   },
   mounted() {
@@ -224,12 +146,22 @@ export default {
         method: "get",
         url: this.$util.baseUrl + "users/goods",
       }).then((res) => {
-        // if (res.data.code === "200") {
-        //   this.goods = res.data.data;
-        //   console.log(this.goods[0].goodsimg);
-        //   // this.goodsName = res.data.data[0].userbalance;
-        //   // this.intbalance = res.data.data[0].Intbalance;
-        // }
+        if (res.data.code === "200") {
+          this.goodsList = res.data.data;
+          console.log(this.goodsList);
+          // console.log(this.goods[0].goodsimg);
+          // this.goodsName = res.data.data[0].userbalance;
+          // this.intbalance = res.data.data[0].Intbalance;
+        }
+      });
+    },
+    // 去商品详情页
+    goDetails(id) {
+      this.$router.push({
+        path: "/destails",
+        query: {
+          id: id,
+        },
       });
     },
   },

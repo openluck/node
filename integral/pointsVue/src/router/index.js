@@ -4,7 +4,7 @@
  * @Author: OpenLcuk
  * @Date: 2021-05-14 13:43:38
  * @LastEditors: OpenLcuk
- * @LastEditTime: 2021-05-14 13:56:09
+ * @LastEditTime: 2021-05-17 16:30:30
  */
 import Vue from "vue";
 import Router from "vue-router";
@@ -49,6 +49,30 @@ export default new Router({
           component: () => import("../components/Pointes/Pointes.vue"),
           meta: {
             title: "积分中心"
+          }
+        },
+        {
+          path: "/publish",
+          name: "Publish",
+          component: () => import("../components/Publish/Publish.vue"),
+          meta: {
+            title: "发布中心"
+          }
+        },
+        {
+          path: "/destails",
+          name: "Destails",
+          component: () => import("../components/Destails/Destails.vue"),
+          meta: {
+            title: "商品详情"
+          }
+        },
+        {
+          path: "/send",
+          name: "Send",
+          component: () => import("../components/Send/Send.vue"),
+          meta: {
+            title: "赠送"
           }
         },
       ]
