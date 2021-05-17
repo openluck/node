@@ -7,7 +7,7 @@
       @breakpoint="onBreakpoint"
     >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="[`${index}`]">
+      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
         <a-menu-item key="1" @click="goPage(1)">
           <a-icon type="user" />
           <span class="nav-text">首页</span>

@@ -11,7 +11,7 @@ const config = {
         DATABASE:"integral",
         USERNAME:"root",
         PASSWORD:"123456",
-        PORT:"3306",
+        PORT:"3308",
         HOST:"localhost"
     }
 }
